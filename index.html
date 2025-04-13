@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EATIT - Organic Pasta & Sauce</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"> <!-- Font Awesome -->
+</head>
+<body>
+    <div id="loader">
+        <div></div>
+      </div>
+  <header>
+    <h2>EatIt.</h2>
+    <nav>
+        <a href="#"><i class="fas fa-home"></i> Home</a>
+        <a href="#"><i class="fas fa-carrot"></i> Fresh Food</a>
+        <a href="#"><i class="fas fa-store"></i> Shop</a>
+        <a href="#"><i class="fas fa-info-circle"></i> About</a>
+        <a href="login.html"><i class="fas fa-sign-in-alt"></i> Sign-in</a>
+      <a href="#" class="cart-icon">
+        <i class="fas fa-shopping-cart"></i> 
+      </a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-text">
+      <p>Let’s solve hunger together with monthly offer</p>
+      <h1>ORGANIC PASTA & SAUCE</h1>
+      <button>Shop Now</button>
+    </div>
+    <div class="hero-img">
+      <img src="./Assets/1.png" alt="Pasta Bowl">
+    </div><br>
+  </section>
+  <div class="marquee">
+    <p>Fresh Ingredients   &nbsp; •  &nbsp; Delicious Recipes  &nbsp; • &nbsp;  Fast Delivery &nbsp;  • &nbsp; Healthy Meals  </p>
+  </div>
+  <section class="featured">
+    <h2>Featured Products</h2>
+    <div class="filters">
+      <button>Meat</button>
+      <button>Fish & Seafood</button>
+      <button>Vegetables</button>
+      <button>Bread & Dairy</button>
+    </div>
+    <div class="products">
+      <div class="product-card">
+        <img src="./Assets/pasta-removebg.png" alt="Dish">
+        <h3>Veggie Pasta</h3>
+        <p>₹12.00 <span>₹15.00</span></p>
+      </div>
+      <div class="product-card">
+        <img src="./Assets/piz-removebg.png" alt="Dish">
+        <h3>Salad Bowl</h3>
+        <p>₹10.00</p>
+      </div>
+      <div class="product-card">
+        <img src="./Assets/pizza.png" alt="Dish">
+        <h3>Spicy Stir-fry</h3>
+        <p>₹14.00</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="hot-banner">
+    <h2>HOT MENU – ELAD APELSIN & FLÄDER</h2>
+    <button>Order Now</button>
+  </section>
+
+  <section class="blog-section">
+    <div class="blog-card">
+        <br><br>
+      <img src="./Assets/hamburger-removebg-preview.png" alt="Blog" style="width: 100%; height: auto; top: 10px;">
+      <br><br><br><h4>Fresh Food For Your Life</h4>
+      <p>Healthy recipes and tips to stay energized.</p>
+    </div>
+    <div class="blog-card">
+      <img src="./Assets/briyani-removebg.png" alt="Blog" style="width: 100%; height: auto;">
+      <h4>Mazano Multi Purpose PSD Template</h4>
+      <p>Design your food shop with style and simplicity.</p>
+    </div>
+    <div class="blog-card">
+        <img src="./Assets/pasta-removebg.png" alt="Blog">
+        <h4>Delicious Pasta Recipes</h4>
+        <p>Explore the best pasta recipes for your family.</p>
+      </div>
+      <div class="blog-card">
+        <img src="./Assets/pizza.png" alt="Blog">
+        <h4>Pizza Lovers' Guide</h4>
+        <p>Discover the secrets to making perfect pizza.</p>
+      </div>
+      <div class="blog-card">
+        <img src="./Assets/soup-removebg.png" alt="Blog">
+        <h4>Healthy Salad Ideas</h4>
+        <p>Stay fit with these easy-to-make salads.</p>
+      </div>
+  </section>
+
+  <footer>
+    <div>
+      <h4>EATIT.</h4>
+      <p>Empor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam.</p>
+    </div>
+    <div>
+      <h4>Categories</h4>
+      <a href="#">Lifestyle</a>
+      <a href="#">Lights & Lamps</a>
+      <a href="#">Home Decor</a>
+    </div>
+    <div>
+      <h4>Information</h4>
+      <a href="#">Special</a>
+      <a href="#">Best Sellers</a>
+      <a href="#">Contact</a>
+    </div>
+    <div>
+      <h4>Newsletter</h4>
+      <input type="email" placeholder="Your Email" style="padding: 10px; width: 80%;">
+      <button style="padding: 10px; background: #e74c3c; color: white; border: none; margin-top: 10px;">Subscribe</button>
+    </div>
+  </footer>
+  <script>
+    window.addEventListener('load', () => {
+      const loader = document.getElementById('loader');
+      if (loader) {
+        loader.style.display = 'none'; 
+      }
+    });
+  </script>
+</body>
+</html>

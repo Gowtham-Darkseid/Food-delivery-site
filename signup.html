@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up - EatIt</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #000000;
+      font-family: 'Open Sans', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url(./Assets/bg.jpg);
+      background-size: cover;
+      background-position: center;
+      opacity: 0.5; 
+      z-index: -1; 
+    }
+
+    .signup-container {
+      background: rgba(255, 255, 255, 0.415); 
+      backdrop-filter: blur(10px); 
+      -webkit-backdrop-filter: blur(10px); 
+      padding: 50px; /* Increased padding */
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.52); /* Subtle border */
+      width: 100%;
+      max-width: 500px; /* Increased max width */
+      text-align: center;
+    }
+
+    .signup-container h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem; /* Increased font size */
+      color: #e74c3c;
+      margin-bottom: 25px;
+    }
+
+    .signup-container form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px; /* Increased gap between inputs */
+    }
+
+    .signup-container input {
+  padding: 15px; /* Increased padding */
+  font-size: 1.2rem; /* Increased font size */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.3s ease;
+  width: 100%; /* Ensure full width */
+  box-sizing: border-box; /* Include padding and border in width */
+}
+
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-container input {
+  width: 100%; /* Ensure full width */
+  box-sizing: border-box; /* Include padding and border in width */
+  padding-right: 40px; /* Add space for the toggle icon */
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px; /* Position the icon inside the input field */
+  cursor: pointer;
+  color: #aaa;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+.toggle-password:hover {
+  color: #e74c3c; /* Change color on hover */
+}
+
+    .signup-container input:focus {
+      border-color: #e74c3c;
+    }
+
+    .signup-container button {
+      padding: 15px; 
+      font-size: 1.2rem; 
+      background: #e74c3c;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      width: 200px; /* Set a fixed width */
+      margin: 0 auto; /* Center the button */
+      display: block; /* Ensure the button is centered */
+    }
+
+    .signup-container button:hover {
+      background: #c0392b;
+    }
+
+    .signup-container p {
+      font-size: 1rem; 
+      color: #555;
+    }
+
+    .signup-container a {
+      color: #e74c3c;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .signup-container a:hover {
+      text-decoration: underline;
+    }
+    .social-login {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+  }
+    .social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 50%; /* Make the icons circular */
+    color: #000000;
+    background: none; /* Remove background */
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    text-decoration: none;
+  }
+
+  .social-btn:hover {
+    transform: scale(1.1); /* Slight zoom effect on hover */
+  }
+
+  .social-btn.google {
+    color: #db4437; /* Google red */
+  }
+
+  .social-btn.apple {
+    color: #333; /* Apple black */
+  }
+
+  .social-btn.github {
+    color: #24292e; /* GitHub dark gray */
+  }
+  </style>
+</head>
+<body>
+  <div class="signup-container">
+    <h2>Create Your Account</h2><br>
+    <form action="#" method="POST">
+      <input type="text" name="name" placeholder="Full Name" required>
+      <input type="email" name="email" placeholder="Email Address" required>
+      <div class="password-container">
+        <input type="password" id="password" name="password" placeholder="Password" required>
+        <i class="fas fa-eye toggle-password" id="togglePassword"></i>
+      </div>
+      <div class="password-container">
+        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+        <i class="fas fa-eye toggle-password" id="toggleConfirmPassword"></i>
+      </div>
+      <button type="submit">Sign Up</button>
+    </form><br>
+    <p>Or login with:</p>
+    <div class="social-login">
+        <a href="#" class="social-btn google"><i class="fab fa-google"></i></a>
+        <a href="#" class="social-btn apple"><i class="fab fa-apple"></i></a>
+        <a href="#" class="social-btn github"><i class="fab fa-github"></i></a>
+      </div><br>
+    <p>Already have an account? <a href="login.html">Login</a></p>
+  </div>
+  <script>
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordField = document.getElementById('password');
+    const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+    const confirmPasswordField = document.getElementById('confirmPassword');
+
+    togglePassword.addEventListener('click', () => {
+      const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordField.setAttribute('type', type);
+      togglePassword.classList.toggle('fa-eye');
+      togglePassword.classList.toggle('fa-eye-slash');
+    });
+
+    toggleConfirmPassword.addEventListener('click', () => {
+      const type = confirmPasswordField.getAttribute('type') === 'password' ? 'text' : 'password';
+      confirmPasswordField.setAttribute('type', type);
+      toggleConfirmPassword.classList.toggle('fa-eye');
+      toggleConfirmPassword.classList.toggle('fa-eye-slash');
+    });
+  </script>
+</body>
+</html>
