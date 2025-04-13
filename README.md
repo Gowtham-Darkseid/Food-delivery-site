@@ -1,4 +1,4 @@
-![screencapture](https://github.com/user-attachments/assets/638119fa-033b-4bbf-b4ca-cb4a6798a3aa)# 🍔 Food Delivery Site
+# 🍔 Food Delivery Site
 
 A sleek and responsive food delivery website made with modern web technologies. Users can explore delicious menus, view featured items, and experience a smooth online ordering interface.
 
