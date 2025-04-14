@@ -1,6 +1,6 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Open Sans', sans-serif; 
-    background: #fff; 
+    background: #f8eeee; 
     color: #333;
     padding-top: 80px;
  }
@@ -403,29 +403,77 @@
 }
 
 @media (max-width: 768px) {
+  .hamburger {
+    display: block; /* Show hamburger menu on mobile */
+  }
+
   nav {
-    display: none; /* Hide the nav menu by default */
+    display: none; /* Hide nav menu by default */
     flex-direction: column;
+    background: white;
     position: absolute;
     top: 60px;
     right: 20px;
-    background: white;
+    width: 200px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 10px;
     border-radius: 5px;
     z-index: 1000;
   }
 
   nav a {
-    padding: 10px 0;
+    padding: 10px;
     border-bottom: 1px solid #ddd;
   }
 
   nav a:last-child {
     border-bottom: none;
   }
+}
 
-  .hamburger {
-    display: block; /* Show the hamburger menu button */
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center;
+    text-align: center;
+    padding: 80px 5%; /* Adjust padding for mobile */
   }
+
+  .hero-text {
+    max-width: 100%; /* Allow text to take full width */
+    margin-bottom: 20px; /* Add spacing below the text */
+  }
+
+  .hero-img img {
+    width: 100%; /* Make the image responsive */
+    max-width: 400px; /* Limit the size of the image */
+    margin-left: 0; /* Remove left margin */
+  }
+}
+
+@media (max-width: 768px) {
+  .marquee {
+    display: none; 
+  }
+}
+
+
+@media (max-width: 768px) {
+  footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 5px; 
+
+  footer div {
+    margin-bottom: 15px; 
+  }
+
+  footer h4 {
+    margin-bottom: 8px;
+  }
+
+  footer a {
+    margin-bottom: 3px; 
+  }
+}
 }
