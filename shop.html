@@ -275,6 +275,8 @@ nav a:hover {
   flex-direction: column; /* Stack content vertically */
   justify-content: space-between; /* Space between items and total/checkout button */
   border-left: 2px solid #e74c3c; /* Add a border for a modern look */
+  z-index: 1000; /* Ensure it stays above other elements */
+  overflow-y: auto; /* Add scroll for long cart items */
 }
 
 .cart-summary.open {
@@ -303,6 +305,11 @@ nav a:hover {
   margin: 0;
   font-size: 1rem; /* Slightly larger font size */
   color: #555;
+  flex: 1; /* Allow text to take up available space */
+}
+
+.cart-summary .cart-item p:last-child {
+  text-align: right; /* Align price to the right */
 }
 
 .cart-summary .total {
@@ -365,6 +372,81 @@ footer a {
   .food-grid {
     grid-template-columns: repeat(1, 1fr); /* One card per row on small screens */
   }
+}
+/* Modal Styles */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h3 {
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.payment-options {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.payment-option {
+  padding: 10px 20px;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+}
+
+.payment-option:hover {
+  background: #c0392b;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.5rem;
+  color: #333;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  color: #e74c3c;
+}
+.close-cart {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.5rem;
+  color: #333;
+  cursor: pointer;
+}
+
+.close-cart:hover {
+  color: #e74c3c;
 }
   </style>
 </head>
@@ -494,12 +576,26 @@ footer a {
 
   <!-- Cart Summary -->
   <div class="cart-summary" id="cart-summary">
+    <span class="close-cart">&times;</span>
     <h3>Your Cart</h3>
     <div id="cart-items"></div>
     <p class="total">Total: ₹<span id="total-price">0.00</span></p>
     <button id="checkout-button">Proceed to Payment</button>
   </div>
-
+   
+  <!-- Payment Modal -->
+<div id="payment-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <h3>Choose a Payment Method</h3>
+      <div class="payment-options">
+        <button class="payment-option">Credit/Debit Card</button>
+        <button class="payment-option">UPI</button>
+        <button class="payment-option">Net Banking</button>
+        <button class="payment-option">Cash on Delivery</button>
+      </div>
+    </div>
+  </div>
   <script>
     // JavaScript for Cart Functionality
     const cartIcon = document.getElementById('cart-icon');
@@ -527,22 +623,24 @@ foodCards.forEach(card => {
     const item = cart.find(item => item.name === name);
 
     if (item) {
+      // If the item already exists in the cart, increase its quantity
       item.quantity++;
     } else {
+      // If the item is not in the cart, add it with quantity 1
       cart.push({ name, price, quantity: 1 });
     }
 
-    updateCart();
+    updateCart(); // Update the cart display
   });
 });
 
 // Update Cart
 function updateCart() {
-  cartItems.innerHTML = '';
-  total = 0;
+  cartItems.innerHTML = ''; // Clear the cart items
+  total = 0; // Reset the total price
 
   cart.forEach(item => {
-    total += item.price * item.quantity;
+    total += item.price * item.quantity; // Calculate the total price
     cartItems.innerHTML += `
       <div class="cart-item">
         <p>${item.name} x${item.quantity}</p>
@@ -551,8 +649,8 @@ function updateCart() {
     `;
   });
 
-  cartCount.textContent = cart.length;
-  totalPrice.textContent = total.toFixed(2);
+  cartCount.textContent = cart.length; // Update the cart count
+  totalPrice.textContent = total.toFixed(2); // Update the total price
 }
     // Search Functionality
     searchBar.addEventListener('input', () => {
@@ -572,6 +670,34 @@ function updateCart() {
         });
       });
     });
+    // Get modal elements
+const paymentModal = document.getElementById('payment-modal');
+const checkoutButton = document.getElementById('checkout-button');
+const closeButton = document.querySelector('.close-button');
+
+// Open the modal when "Proceed to Payment" is clicked
+checkoutButton.addEventListener('click', () => {
+  paymentModal.style.display = 'flex';
+});
+
+// Close the modal when the close button is clicked
+closeButton.addEventListener('click', () => {
+  paymentModal.style.display = 'none';
+});
+
+// Close the modal when clicking outside the modal content
+window.addEventListener('click', (event) => {
+  if (event.target === paymentModal) {
+    paymentModal.style.display = 'none';
+  }
+});
+// Get the close button element
+const closeCartButton = document.querySelector('.close-cart');
+
+// Close the cart summary when the close button is clicked
+closeCartButton.addEventListener('click', () => {
+  cartSummary.classList.remove('open');
+});
   </script>
     <footer>
         <div>
