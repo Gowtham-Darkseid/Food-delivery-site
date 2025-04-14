@@ -12,7 +12,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 5%;
+    padding: 10px 20px;
     background: rgba(253, 249, 249, 0.7); /* Semi-transparent white */
     backdrop-filter: blur(10px);
     z-index: 1000;
@@ -24,22 +24,22 @@
     color: #000;
     font-weight: bold;
     position: relative;
-    display: inline-flex; 
+    display: inline-flex;
     align-items: center;
-    gap: 5px; 
-}
-
-header nav a i {
-    font-size: 1rem; 
-    color: #e74c3c; 
-    transition: color 0.3s ease; 
-}
-
-header nav a:hover i {
-    color: #c0392b; 
-}
-
-header nav a::after {
+    gap: 5px;
+  }
+  
+  header nav a i {
+    font-size: 1rem;
+    color: #e74c3c;
+    transition: color 0.3s ease;
+  }
+  
+  header nav a:hover i {
+    color: #c0392b;
+  }
+  
+  header nav a::after {
     content: '';
     position: absolute;
     left: 0;
@@ -48,11 +48,25 @@ header nav a::after {
     height: 2px;
     background: #e74c3c;
     transition: width 0.3s ease;
-}
-
-header nav a:hover::after {
+  }
+  
+  header nav a:hover::after {
     width: 100%;
-}
+  }
+  
+  /* Hamburger Menu for Mobile View */
+  .hamburger {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #333;
+  }
+  
+  .hamburger:hover {
+    color: #e74c3c;
+  }
     header h2{
         font-family: 'Playfair Display', serif; 
         font-size: 2rem;
@@ -329,20 +343,22 @@ header nav a:hover::after {
     gap: 20px; 
   }
   
-  #detect-location-btn {
-    background: none; 
-    border: none; 
-    color: #e74c3c; 
-    font-size: 1.5rem; 
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    transition: color 0.3s ease;
-  }
-  
-  #detect-location-btn:hover {
-    color: #c0392b; 
-  }
+ 
+#detect-location-btn {
+  background: none;
+  border: none;
+  color: #e74c3c;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: color 0.3s ease;
+}
+
+#detect-location-btn:hover {
+  color: #c0392b;
+}
+
   
   #user-location {
     margin-top: 5px;
@@ -384,4 +400,32 @@ header nav a:hover::after {
 
 .close-btn:hover {
   color: #c0392b;
+}
+
+@media (max-width: 768px) {
+  nav {
+    display: none; /* Hide the nav menu by default */
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1000;
+  }
+
+  nav a {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+  }
+
+  nav a:last-child {
+    border-bottom: none;
+  }
+
+  .hamburger {
+    display: block; /* Show the hamburger menu button */
+  }
 }

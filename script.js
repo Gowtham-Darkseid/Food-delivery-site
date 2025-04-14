@@ -2,23 +2,20 @@ const detectLocationBtn = document.getElementById('detect-location-btn');
 const mapModal = document.getElementById('map-modal');
 const closeBtn = document.querySelector('.close-btn');
 
-// Initialize the map
 let map;
 function initializeMap(lat, lon) {
   if (!map) {
-    map = L.map('map').setView([lat, lon], 13); // Center the map on the user's location
+    map = L.map('map').setView([lat, lon], 13); 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(map);
 
-    // Add a marker for the user's location
     L.marker([lat, lon]).addTo(map).bindPopup('Your Location').openPopup();
   } else {
-    map.setView([lat, lon], 13); // Update the map view
+    map.setView([lat, lon], 13); 
   }
 }
 
-// Show the modal and fetch the user's location
 detectLocationBtn.addEventListener('click', () => {
   mapModal.style.display = 'flex';
 
@@ -54,3 +51,10 @@ window.addEventListener('load', () => {
     }
   });
 
+  const hamburgerMenu = document.getElementById('hamburger-menu');
+  const navMenu = document.getElementById('nav-menu');
+  
+  // Toggle the navigation menu on hamburger click
+  hamburgerMenu.addEventListener('click', () => {
+    navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+  });
