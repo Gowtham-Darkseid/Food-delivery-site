@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop - EatIt</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link rel="icon" href="./Assets/favicon.ico" type="image/x-icon">
+  <style>
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  height: 100%; /* Ensure the body takes up the full height of the viewport */
+}
+
+body {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  min-height: 100vh; /* Ensure the body is at least the height of the viewport */
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background: #f8f8f8;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+#detect-location-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #e74c3c;
+}
+
+#detect-location-btn:hover {
+  color: #c0392b;
+}
+
+#hamburger-menu {
+  display: none; /* Hidden by default */
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #333;
+}
+
+#hamburger-menu:hover {
+  color: #e74c3c;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #333;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+nav a:hover {
+  color: #e74c3c;
+}
+
+.cart-icon {
+  position: relative;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.cart-icon span {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  background: #e74c3c;
+  color: white;
+  font-size: 0.8rem;
+  padding: 2px 6px;
+  border-radius: 50%;
+}
+
+/* Mobile View */
+@media (max-width: 768px) {
+  #hamburger-menu {
+    display: block; /* Show hamburger menu on mobile */
+  }
+
+  nav {
+    display: none; /* Hide nav menu by default */
+    flex-direction: column;
+    background: white;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    width: 200px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    z-index: 1000;
+  }
+
+  nav a {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  nav a:last-child {
+    border-bottom: none;
+  }
+}
+
+
+    /* Search Bar */
+    .search-bar {
+      margin: 20px auto;
+      text-align: center;
+    }
+
+    .search-bar input {
+      width: 80%;
+      max-width: 400px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    /* Category Filters */
+    .filters {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    .filters button {
+      padding: 10px 20px;
+      border: none;
+      background: #e74c3c;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .filters button:hover {
+      background: #c0392b;
+    }
+
+    .food-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Three cards per row */
+  gap: 30px; /* Adjusted gap between cards */
+  padding: 20px;
+}
+
+.food-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%; /* Automatically adjust width to fit grid */
+  height: 400px; /* Card height */
+  position: relative; /* For overlay effect */
+}
+
+.food-card:hover {
+  transform: scale(1.05); /* Slightly enlarge the card */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+.food-card img {
+  width: 100%;
+  height: 200px; /* Adjusted height for the image */
+  object-fit: cover;
+  transition: transform 0.3s ease; /* Smooth zoom effect */
+}
+
+.food-card:hover img {
+  transform: scale(1.1); /* Zoom in the image on hover */
+}
+
+.food-card .details {
+  padding: 20px; /* Increased padding for better spacing */
+  text-align: center;
+  position: relative;
+  z-index: 2; /* Ensure text is above the overlay */
+}
+
+.food-card .details h3 {
+  font-size: 1.5rem; /* Increased font size for the title */
+  margin-bottom: 10px;
+}
+
+.food-card .details p {
+  font-size: 1.2rem; /* Increased font size for the price */
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.food-card .details button {
+  padding: 12px 25px; /* Increased button size */
+  font-size: 1rem; /* Increased font size for the button text */
+  border: none;
+  background: #e74c3c;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.food-card .details button:hover {
+  background: #c0392b;
+  transform: translateY(-3px); /* Slight lift effect on hover */
+}
+
+/* Overlay Effect */
+.food-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.1); /* Subtle overlay */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1; /* Place it below the text */
+}
+
+.food-card:hover::before {
+  opacity: 1; /* Show overlay on hover */
+}
+    /* Cart Summary */
+    /* Cart Summary */
+    .cart-summary {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 350px; /* Increased width for better spacing */
+  height: 100%;
+  background: #f8f8f8; /* Light background for a clean look */
+  box-shadow: -4px 0 10px rgba(0, 0, 0, 0.2); /* Stronger shadow for depth */
+  padding: 20px;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column; /* Stack content vertically */
+  justify-content: space-between; /* Space between items and total/checkout button */
+  border-left: 2px solid #e74c3c; /* Add a border for a modern look */
+}
+
+.cart-summary.open {
+  transform: translateX(0);
+}
+
+.cart-summary h3 {
+  margin-bottom: 20px;
+  text-align: center; /* Center-align the heading */
+  font-size: 1.5rem; /* Larger font size for the heading */
+  color: #333;
+}
+
+.cart-summary .cart-item {
+  display: flex;
+  justify-content: space-between; /* Align item name and price */
+  align-items: center; /* Vertically align content */
+  margin-bottom: 15px; /* Add more spacing between items */
+  padding: 10px;
+  background: #fff; /* White background for each item */
+  border-radius: 5px; /* Rounded corners for items */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for items */
+}
+
+.cart-summary .cart-item p {
+  margin: 0;
+  font-size: 1rem; /* Slightly larger font size */
+  color: #555;
+}
+
+.cart-summary .total {
+  margin-top: 20px;
+  font-weight: bold;
+  text-align: center; /* Center-align the total price */
+  font-size: 1.2rem; /* Larger font size for the total */
+  color: #333;
+}
+
+.cart-summary button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  background: #e74c3c;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem; /* Larger font size for the button */
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.cart-summary button:hover {
+  background: #c0392b;
+  transform: translateY(-3px); /* Slight lift effect on hover */
+}
+footer {
+  margin-top: auto; /* Push the footer to the bottom */
+  background: #222;
+  color: #ccc;
+  padding: 40px 5%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: space-between;
+}
+
+footer div {
+  flex: 1 1 200px;
+}
+
+footer h4 {
+  color: white;
+  margin-bottom: 15px;
+}
+
+footer a {
+  color: #ccc;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 5px;
+}
+@media (max-width: 1024px) {
+  .food-grid {
+    grid-template-columns: repeat(2, 1fr); /* Two cards per row on medium screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .food-grid {
+    grid-template-columns: repeat(1, 1fr); /* One card per row on small screens */
+  }
+}
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="header-left">
+      <h2>EatIt.</h2>
+      <button id="detect-location-btn" title="Show Location">
+        <i class="fas fa-map-marker-alt"></i>
+      </button>
+    </div>
+    <button id="hamburger-menu" class="hamburger">
+      <i class="fas fa-bars"></i>
+    </button>
+    <nav id="nav-menu">
+      <a href="index.html"><i class="fas fa-home"></i> Home</a>
+      <a href="Fresh.html"><i class="fas fa-carrot"></i> Fresh Food</a>
+      <a href="shop.html"><i class="fas fa-store"></i> Shop</a>
+      <a href="#"><i class="fas fa-info-circle"></i> About</a>
+      <a href="login.html"><i class="fas fa-sign-in-alt"></i> Sign-in</a>
+      <div class="cart-icon" id="cart-icon">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="cart-count">0</span>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Search Bar -->
+  <div class="search-bar">
+    <input type="text" id="search-bar" placeholder="Search for food...">
+  </div>
+
+  <!-- Category Filters -->
+  <div class="filters">
+    <button data-category="all">All</button>
+    <button data-category="fast-food">Fast Food</button>
+    <button data-category="drinks">Drinks</button>
+    <button data-category="desserts">Desserts</button>
+  </div>
+
+  <!-- Food Grid -->
+  <!-- Food Grid -->
+<div class="food-grid" id="food-grid">
+    <!-- Fast Food -->
+    <div class="food-card" data-category="fast-food">
+      <img src="./Assets/burger.jpg" alt="Burger">
+      <div class="details">
+        <h3>Burger</h3>
+        <p>₹149</p>
+        <button>Add to Cart</button>
+      </div>
+    </div>
+    <div class="food-card" data-category="fast-food">
+      <img src="https://img.freepik.com/free-photo/crispy-fried-chicken-plate-with-salad-carrot_1150-20212.jpg?uid=R136581401&ga=GA1.1.791428942.1744522634&semt=ais_hybrid&w=740" alt="Fried Chicken">
+      <div class="details">
+        <h3>Fried Chicken</h3>
+        <p>₹199</p>
+        <button>Add to Cart</button>
+      </div>
+    </div>
+  
+    <!-- Drinks -->
+    <div class="food-card" data-category="drinks">
+      <img src="https://img.freepik.com/free-photo/high-angle-mix-alcoholic-drinks_23-2148673763.jpg?uid=R136581401&ga=GA1.1.791428942.1744522634&semt=ais_hybrid&w=740" alt="Drink">
+      <div class="details">
+        <h3>Drink</h3>
+        <p>₹49</p>
+        <button>Add to Cart</button>
+      </div>
+    </div>
+    <div class="food-card" data-category="drinks">
+      <img src="https://img.freepik.com/free-photo/cold-coffee-with-ice-cream_1220-4091.jpg?uid=R136581401&ga=GA1.1.791428942.1744522634&semt=ais_hybrid&w=740" alt="Iced Coffee">
+      <div class="details">
+        <h3>Iced Coffee</h3>
+        <p>₹99</p>
+        <button>Add to Cart</button>
+      </div>
+    </div>
+  
+    <!-- Desserts -->
+    <div class="food-card" data-category="desserts">
+      <img src="https://img.freepik.com/free-photo/close-up-tray-ful-delicious-jelly-desserts-raspberry-chocolate-flavors-whipped-cream-berries-chocolate-cacao-tiramisu-recipe-cooking-cusine-kitchen-party-candy-buffet_7502-5859.jpg?uid=R136581401&ga=GA1.1.791428942.1744522634&semt=ais_hybrid&w=740" alt="Dessert">
+      <div class="details">
+        <h3>Dessert</h3>
+        <p>₹99</p>
+        <button>Add to Cart</button>
+      </div>
+    </div>
+    <div class="food-card" data-category="desserts">
+      <img src="https://img.freepik.com/premium-photo/chocolate-cake-with-chocolate-cream-fresh-berries-plate-wooden-table_392895-20808.jpg?uid=R136581401&ga=GA1.1.791428942.1744522634&semt=ais_hybrid&w=740" alt="Chocolate Cake">
+      <div class="details">
+        <h3>Chocolate Cake</h3>
+        <p>₹149</p>
+        <button>Add to Cart</button>
+      </div>
+    </div>
+  
+    <!-- Indian Cuisine -->
+    <div class="food-card" data-category="indian">
+      <img src="https://img.freepik.com/free-photo/delicious-food-table_23-2150857814.jpg?uid=R136581401&ga=GA1.1.791428942.1744522634&semt=ais_hybrid&w=740" alt="Indian Thali">
+      <div class="details">
+        <h3>Indian Thali</h3>
+        <p>₹299</p>
+        <button>Add to Cart</button>
+      </div>
+    </div>
+    <div class="food-card" data-category="indian">
+      <img src="https://img.freepik.com/free-photo/curry-with-chicken-onions-indian-food-asian-cuisine_2829-4415.jpg?uid=R136581401&ga=GA1.1.791428942.1744522634&semt=ais_hybrid&w=740" alt="Butter Chicken">
+      <div class="details">
+        <h3>Butter Chicken</h3>
+        <p>₹249</p>
+        <button>Add to Cart</button>
+      </div>
+    </div>
+  
+    <!-- Pizza -->
+    <div class="food-card" data-category="fast-food">
+      <img src="https://img.freepik.com/premium-photo/pizza-is-tray-with-fire-it_960117-533.jpg?uid=R136581401&ga=GA1.1.791428942.1744522634&semt=ais_hybrid&w=740" alt="Pizza">
+      <div class="details">
+        <h3>Pizza</h3>
+        <p>₹299</p>
+        <button>Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cart Summary -->
+  <div class="cart-summary" id="cart-summary">
+    <h3>Your Cart</h3>
+    <div id="cart-items"></div>
+    <p class="total">Total: ₹<span id="total-price">0.00</span></p>
+    <button id="checkout-button">Proceed to Payment</button>
+  </div>
+
+  <script>
+    // JavaScript for Cart Functionality
+    const cartIcon = document.getElementById('cart-icon');
+    const cartSummary = document.getElementById('cart-summary');
+    const cartCount = document.getElementById('cart-count');
+    const cartItems = document.getElementById('cart-items');
+    const totalPrice = document.getElementById('total-price');
+    const foodCards = document.querySelectorAll('.food-card');
+    const searchBar = document.getElementById('search-bar');
+    const filters = document.querySelectorAll('.filters button');
+
+    let cart = [];
+    let total = 0;
+
+    // Toggle Cart Summary
+    cartIcon.addEventListener('click', () => {
+      cartSummary.classList.toggle('open');
+    });
+
+// Add to Cart
+foodCards.forEach(card => {
+  card.querySelector('button').addEventListener('click', () => {
+    const name = card.querySelector('h3').textContent;
+    const price = parseFloat(card.querySelector('p').textContent.replace('₹', ''));
+    const item = cart.find(item => item.name === name);
+
+    if (item) {
+      item.quantity++;
+    } else {
+      cart.push({ name, price, quantity: 1 });
+    }
+
+    updateCart();
+  });
+});
+
+// Update Cart
+function updateCart() {
+  cartItems.innerHTML = '';
+  total = 0;
+
+  cart.forEach(item => {
+    total += item.price * item.quantity;
+    cartItems.innerHTML += `
+      <div class="cart-item">
+        <p>${item.name} x${item.quantity}</p>
+        <p>₹${(item.price * item.quantity).toFixed(2)}</p>
+      </div>
+    `;
+  });
+
+  cartCount.textContent = cart.length;
+  totalPrice.textContent = total.toFixed(2);
+}
+    // Search Functionality
+    searchBar.addEventListener('input', () => {
+      const query = searchBar.value.toLowerCase();
+      foodCards.forEach(card => {
+        const name = card.querySelector('h3').textContent.toLowerCase();
+        card.style.display = name.includes(query) ? 'block' : 'none';
+      });
+    });
+
+    // Filter by Category
+    filters.forEach(filter => {
+      filter.addEventListener('click', () => {
+        const category = filter.getAttribute('data-category');
+        foodCards.forEach(card => {
+          card.style.display = category === 'all' || card.getAttribute('data-category') === category ? 'block' : 'none';
+        });
+      });
+    });
+  </script>
+    <footer>
+        <div>
+          <h4>EATIT.</h4>
+          <p>Empor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam.</p>
+        </div>
+        <div>
+          <h4>Categories</h4>
+          <a href="#">Lifestyle</a>
+          <a href="#">Lights & Lamps</a>
+          <a href="#">Home Decor</a>
+        </div>
+        <div>
+          <h4>Information</h4>
+          <a href="#">Special</a>
+          <a href="#">Best Sellers</a>
+          <a href="#">Contact</a>
+        </div>
+        <div>
+          <h4>Newsletter</h4>
+          <input type="email" placeholder="Your Email" style="padding: 10px; width: 80%;">
+          <button style="padding: 10px; background: #e74c3c; color: white; border: none; margin-top: 10px;">Subscribe</button>
+        </div>
+      </footer>
+</body>
+</html>
